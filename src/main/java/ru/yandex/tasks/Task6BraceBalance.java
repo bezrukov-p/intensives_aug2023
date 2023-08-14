@@ -1,5 +1,10 @@
 package ru.yandex.tasks;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+
 public class Task6BraceBalance {
     public static boolean checkBalance(String sequence) {
         /*
@@ -7,7 +12,27 @@ public class Task6BraceBalance {
          * Выход: true/false, является ли строка ПСП
          */
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-        return true;
+        Set<Character> open = Set.of('(', '{', '[');
+
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put('}', '{');
+        map.put(']', '[');
+
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < sequence.length(); i++) {
+            char curr = sequence.charAt(i);
+            if (open.contains(curr))
+                stack.add(curr);
+            else {
+                if (stack.isEmpty())
+                    return false;
+                if (stack.peek() != map.get(curr))
+                    return false;
+                stack.pop();
+            }
+        }
+        return stack.isEmpty();
     }
 
     public static void selfCheck() {
