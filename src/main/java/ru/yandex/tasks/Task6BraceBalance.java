@@ -14,10 +14,10 @@ public class Task6BraceBalance {
         // (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ WRITE CODE HERE (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
         Set<Character> open = Set.of('(', '{', '[');
 
-        Map<Character, Character> map = new HashMap<>();
-        map.put(')', '(');
-        map.put('}', '{');
-        map.put(']', '[');
+        Map<Character, Character> closeBraceToOpenBraceMap = new HashMap<>();
+        closeBraceToOpenBraceMap.put(')', '(');
+        closeBraceToOpenBraceMap.put('}', '{');
+        closeBraceToOpenBraceMap.put(']', '[');
 
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < sequence.length(); i++) {
@@ -27,7 +27,7 @@ public class Task6BraceBalance {
             else {
                 if (stack.isEmpty())
                     return false;
-                if (stack.peek() != map.get(curr))
+                if (stack.peek() != closeBraceToOpenBraceMap.get(curr))
                     return false;
                 stack.pop();
             }
